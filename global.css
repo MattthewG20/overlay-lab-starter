@@ -55,6 +55,8 @@ body {
   max-width: 40rem;
   border-radius: var(--radius);
   text-decoration: none;
+
+  position: relative;
 }
 
 .photo {
@@ -72,7 +74,19 @@ body {
 
 /* YOUR CODE: Lab 1, the overlay recipe */
 
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius);
+  color: #FFFFFF;
+  background-color: rgba(29, 78, 137, 0.25)
+}
 
+.photo-card:focus-visible .overlay {
+  outline: 4px solid var(--primary-color);
+}
 
 
 /* ---------- Lab 2: Four Ways In ---------- */
@@ -83,7 +97,41 @@ body {
 
 /* YOUR CODE: Lab 2, four entrances */
 
+.overlay {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity: 0;
+}
 
+.overlay-fade .overlay {
+  background-color: rgba(26, 120, 124, 0.5);
+}
+
+.overlay-slide .photo-card,
+.overlay-zoom .photo-card {
+  overflow: hidden;
+}
+
+.overlay-slide .overlay {
+  transform: translateY(100%);
+}
+
+.photo-card {
+  overflow: hidden;
+}
+
+.overlay-zoom .photo {
+  transition: transform 0.6s ease;
+}
+
+.overlay-gradient .photo {
+  transition: 0.6s ease;
+}
+
+.overlay-gradient .overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, .85), rgba(0, 0, 0, 0) 60%);
+  place-items: end start;
+  padding: 20px;
+}
 
 
 /* ---------- Lab 3: Click Moves ---------- */
@@ -120,6 +168,35 @@ body {
 
 /* YOUR CODE: Lab 3, click moves (:active) */
 
+.push-button {
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.35);
+  transition: active 0.1s ease;
+}
+
+.push-button:active {
+  transform: translateY(6px);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.35);
+}
+
+.squish-card {
+  transition: transform 0.5s ease;
+}
+
+.squish-card:active {
+  transform: scale(0.9);
+}
+
+.arrow {
+  transition: transform 0.5s ease;
+  display: inline-block;
+  margin-left: 2px;
+}
+
+.slide-button:hover .arrow {
+  transform: translateX(15px);
+  display: inline-block;
+}
+
 
 
 /* ---------- PC: 1024px and up ---------- */
@@ -129,5 +206,17 @@ body {
   }
 
   /* YOUR CODE: PC only, hide the overlays until hover */
+  .photo-card:hover .overlay,
+  .photo-card:focus-visible .overlay {
+    opacity: 1;
+  }
+
+  .overlay-slide:hover .overlay {
+    transform: translateY(0);
+  }
+
+  .overlay-zoom:hover .photo {
+    transform: scale(1.15);
+  }
 
 }
